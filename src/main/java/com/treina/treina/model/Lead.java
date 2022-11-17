@@ -13,7 +13,7 @@ public class Lead {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idLead;
+    private Long id;
 
     @Column(name = "nome", length = 45)
     private String nome;
