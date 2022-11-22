@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -22,5 +23,5 @@ public class DiaAula {
 
     private Long idCurso;
 
-    private Long dataAula;
+    private LocalDate dataAula;
 }
