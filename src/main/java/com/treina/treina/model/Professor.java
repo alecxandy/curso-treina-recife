@@ -4,46 +4,39 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 import javax.persistence.*;
 
+
+
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "tb_turma")
-public class Turma {
+@Data
+@Table(name = "tb_professor")
+public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long id_aluno;
+    @Column(name = "nome", length = 45)
+    private String nome;
 
-    private Long id_curso;
+    @Column(name = "telefone", length = 20)
+    private String telefone;
 
-    private Long id_professor;
+    @Column(name = "vrHoraAula")
+    private float valorHoraAula;
 
-    private Float valor;
 
-    private boolean segunda;
-
-    private boolean terca;
-    private boolean quarta;
-    private boolean quinta;
-    private boolean sexta;
-    private boolean sabado;
-    private boolean domingo;
-
-    @OneToMany(mappedBy = "turmaList")
-    private List<Aluno> alunoList;
-    
 
     @OneToMany
     @JoinColumn(name = "turma_id")
     private List<Turma> turmaList;
-
+     
 
 }
