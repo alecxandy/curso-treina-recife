@@ -5,7 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+
 
 @Entity
 @NoArgsConstructor
@@ -28,5 +32,11 @@ public class Professor {
     @Column(name = "vrHoraAula")
     private float valorHoraAula;
 
+
+
+    @OneToMany
+    @JoinColumn(name = "turma_id")
+    private List<Turma> turmaList;
+     
 
 }

@@ -39,5 +39,11 @@ public class Turma {
 
     @OneToMany(mappedBy = "turmaList")
     private List<Aluno> alunoList;
+    
+
+    @OneToMany
+    @JoinColumn(name = "turma_id")
+    private List<Turma> turmaList;
+
 
 }
