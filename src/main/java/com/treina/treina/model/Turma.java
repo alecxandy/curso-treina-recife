@@ -41,9 +41,8 @@ public class Turma {
     private List<Aluno> alunoList;
     
 
-    @OneToMany
-    @JoinColumn(name = "turma_id")
-    private List<Turma> turmaList;
+    @OneToOne(mappedBy  = "turma")
+    private Professor professor;
 
 
 }
