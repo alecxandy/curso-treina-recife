@@ -38,9 +38,11 @@ public class Turma {
             joinColumns = {@JoinColumn(name = "turma_id_fk")},
             inverseJoinColumns = {@JoinColumn(name = "aluno_id_fk")})
     private List<Aluno> alunoList;
+    
+    
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "professor_id_fk")
+    @JoinColumn(name = "professor_id")
+    @OneToOne
     private Professor professor;
 
     @ManyToOne
