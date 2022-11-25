@@ -34,4 +34,9 @@ public class Professor {
     private List<Turma> turmaList;
 
 
+    @OneToMany
+    @JoinColumn(name = "professor_id")
+    private List <Turma> turmalList; 
+     
+
 }
