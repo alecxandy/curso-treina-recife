@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,11 +30,8 @@ public class Professor {
     @Column(name = "vrHoraAula")
     private float valorHoraAula;
 
+    @OneToMany(mappedBy = "professor")
+    private List<Turma> turmaList;
 
-
-    @OneToOne
-    @JoinColumn(name = "professor_id")
-    private Turma turma;
-     
 
 }

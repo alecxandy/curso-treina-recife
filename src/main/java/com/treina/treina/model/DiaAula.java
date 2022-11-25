@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "diaAula")
+@Table(name = "tb_diaAula")
 public class DiaAula {
 
     @Id

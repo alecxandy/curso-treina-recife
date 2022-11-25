@@ -32,13 +32,14 @@ public class Turma {
     private boolean sabado;
     private boolean domingo;
 
-    @ManyToMany
-    @JoinTable(name = "turma_has_aluno",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "tb_turma_has_aluno",
             joinColumns = {@JoinColumn(name = "turma_id_fk")},
             inverseJoinColumns = {@JoinColumn(name = "aluno_id_fk")})
     private List<Aluno> alunoList;
 
-    @OneToOne(mappedBy  = "turma")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "professor_id_fk")
     private Professor professor;
 
 
