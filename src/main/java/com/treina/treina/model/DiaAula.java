@@ -1,27 +1,25 @@
 package com.treina.treina.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Table(name = "diaAula")
+@Table(name = "tb_diaAula")
 public class DiaAula {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long idCurso;
-
+    @Column(name = "dt_aula")
     private LocalDate dataAula;
+
+    @OneToMany(mappedBy = "diaAula")
+    private List<Turma> turmaList;
 }

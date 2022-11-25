@@ -34,8 +34,7 @@ public class Aluno {
     @Column(name = "cpf", length = 11)
     private String cpf;
 
-    @OneToMany
-    @JoinColumn(name = "turma_id")
+    @ManyToMany(mappedBy = "alunoList")
     private List<Turma> turmaList;
 
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -20,16 +21,10 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long id_aluno;
-
-    private Long id_curso;
-
-    private Long id_professor;
-
+    @Column(name = "valor")
     private Float valor;
 
     private boolean segunda;
-
     private boolean terca;
     private boolean quarta;
     private boolean quinta;
@@ -37,12 +32,25 @@ public class Turma {
     private boolean sabado;
     private boolean domingo;
 
-    @OneToMany(mappedBy = "turmaList")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "tb_turma_has_aluno",
+            joinColumns = {@JoinColumn(name = "turma_id_fk")},
+            inverseJoinColumns = {@JoinColumn(name = "aluno_id_fk")})
     private List<Aluno> alunoList;
-    
 
-    @OneToOne(mappedBy  = "turma")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "professor_id_fk")
     private Professor professor;
+
+    @ManyToOne
+    @JoinColumn(name = "curso_id_fk")
+    private Curso curso;
+
+    @ManyToOne
+    @JoinColumn(name = "diaAula_id_fk")
+    private DiaAula diaAula;
+
+
 
 
 }
