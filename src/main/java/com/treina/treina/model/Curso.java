@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -34,5 +35,8 @@ public class Curso {
 
     @Column(name = "valor")
     private float valor;
+
+    @OneToMany(mappedBy = "curso")
+    private List<Turma> turmaList;
 
 }

@@ -42,5 +42,11 @@ public class Turma {
     @JoinColumn(name = "professor_id_fk")
     private Professor professor;
 
+    @ManyToOne
+    @JoinColumn(name = "curso_id_fk")
+    private Curso curso;
+
+
+
 
 }
