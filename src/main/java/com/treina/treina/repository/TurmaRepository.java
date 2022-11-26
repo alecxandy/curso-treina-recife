@@ -1,5 +1,9 @@
 package com.treina.treina.repository;
 
-public interface TurmaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.treina.treina.model.Turma;
+
+public interface TurmaRepository extends JpaRepository<Turma,Long> {
     
 }
