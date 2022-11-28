@@ -38,8 +38,6 @@ public class Turma {
             joinColumns = {@JoinColumn(name = "turma_id_fk")},
             inverseJoinColumns = {@JoinColumn(name = "aluno_id_fk")})
     private List<Aluno> alunoList;
-    
-    
 
     @JoinColumn(name = "professor_id")
     @OneToOne
