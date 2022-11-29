@@ -20,7 +20,7 @@ import com.treina.treina.model.Lead;
 import com.treina.treina.repository.LeadRepository;
 
 @RestController
-@RequestMapping("/lead")
+@RequestMapping("/api/leads")
 public class LeadController {
     
 
@@ -28,7 +28,7 @@ public class LeadController {
     private LeadRepository leadRepository;
 
     
-    @PostMapping("/save")
+    @PostMapping("/insert")
     public ResponseEntity<Lead>save(@RequestBody Lead lead){
         lead.setDataCadastro(LocalDate.now());
         lead.setDataNovoContato(LocalDate.now());
@@ -42,7 +42,7 @@ public class LeadController {
 
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Optional<Lead>>delete(@PathVariable Long id){
         Optional<Lead>optionalLead=leadRepository.findById(id);
         if (optionalLead.isPresent()){
