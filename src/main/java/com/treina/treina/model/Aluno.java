@@ -22,10 +22,10 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome", length = 45)
+    @Column(name = "nome", length = 45, nullable = false)
     private String nome;
 
-    @Column(name = "cpf", length = 11)
+    @Column(name = "cpf", length = 11, nullable = false)
     private String cpf;
 
     @Column(name = "email", length = 45)
@@ -36,7 +36,6 @@ public class Aluno {
 
     @Column(name = "endereco", length = 45)
     private String endereco;
-
 
 
     @ManyToMany(mappedBy = "alunoList")
