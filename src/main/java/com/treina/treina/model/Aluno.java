@@ -38,8 +38,7 @@ public class Aluno {
     private String endereco;
 
 
-    @ManyToMany(mappedBy = "alunoList")
-    private List<Turma> turmaList;
+
 
 
 }
