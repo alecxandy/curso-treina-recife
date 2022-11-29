@@ -25,14 +25,19 @@ public class Aluno {
     @Column(name = "nome", length = 45)
     private String nome;
 
+    @Column(name = "cpf", length = 11)
+    private String cpf;
+
+    @Column(name = "email", length = 45)
+    private String email;
+
     @Column(name = "telefone", length = 20)
     private String telefone;
 
     @Column(name = "endereco", length = 45)
     private String endereco;
 
-    @Column(name = "cpf", length = 11)
-    private String cpf;
+
 
     @ManyToMany(mappedBy = "alunoList")
     private List<Turma> turmaList;
