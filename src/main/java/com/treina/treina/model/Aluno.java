@@ -22,8 +22,14 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome", length = 45)
+    @Column(name = "nome", length = 45, nullable = false)
     private String nome;
+
+    @Column(name = "cpf", length = 11, nullable = false)
+    private String cpf;
+
+    @Column(name = "email", length = 45)
+    private String email;
 
     @Column(name = "telefone", length = 20)
     private String telefone;
@@ -31,8 +37,6 @@ public class Aluno {
     @Column(name = "endereco", length = 45)
     private String endereco;
 
-    @Column(name = "cpf", length = 11)
-    private String cpf;
 
     @ManyToMany(mappedBy = "alunoList")
     private List<Turma> turmaList;
