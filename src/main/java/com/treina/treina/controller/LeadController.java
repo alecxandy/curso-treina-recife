@@ -28,7 +28,7 @@ public class LeadController {
     private LeadRepository leadRepository;
 
     
-    @PostMapping("/insert")
+    @PostMapping("/")
     public ResponseEntity<Lead>save(@RequestBody Lead lead){
         lead.setDataCadastro(LocalDate.now());
         lead.setDataNovoContato(LocalDate.now());
@@ -36,7 +36,7 @@ public class LeadController {
 
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public ResponseEntity<List<Lead>>listAll(){
      return ResponseEntity.status(HttpStatus.OK).body(leadRepository.findAll());
 
@@ -53,6 +53,19 @@ public class LeadController {
         }
   
     }
+      
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Lead>> findById(@PathVariable Long id) {
+        Optional<Lead> optionalLead = leadRepository.findById(id);
+        if (optionalLead.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(optionalLead);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Lead>update(@PathVariable Long id,@RequestBody Lead lead){
