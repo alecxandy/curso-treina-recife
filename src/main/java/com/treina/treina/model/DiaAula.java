@@ -1,19 +1,15 @@
 package com.treina.treina.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Table(name = "tb_diaAula")
 public class DiaAula {
 
@@ -31,4 +27,11 @@ public class DiaAula {
     @OneToOne
     @JoinColumn(name = "sala_id_fk")
     private Sala sala;
+
+    @Column(name = "dt_aula")
+    private LocalDateTime dataAula;
+
+    @OneToMany(mappedBy = "diaAula")
+    private List<Turma> turmaList;
+
 }
