@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/api/alunos")
 public class ALunoController {
 
     @Autowired
     private AlunoRepository alunoRepository;
 
-    @PostMapping("/save")
+    @PostMapping("/")
     public ResponseEntity<Aluno> save(@RequestBody Aluno aluno) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoRepository.save(aluno));
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public ResponseEntity<List<Aluno>> listAll() {
         return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.findAll());
     }

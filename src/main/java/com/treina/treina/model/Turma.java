@@ -51,7 +51,4 @@ public class Turma {
     @JoinColumn(name = "diaAula_id_fk")
     private DiaAula diaAula;
 
-
-
-
 }
