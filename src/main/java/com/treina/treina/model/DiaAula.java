@@ -22,6 +22,9 @@ public class DiaAula {
     @Column(name = "dt_data")
     private LocalDateTime localDateTime;
 
+    @Column(name = "dt_aula")
+    private LocalDateTime dataAula;
+
     @OneToOne
     @JoinColumn(name = "turma_id_fk")
     private Turma turma;
@@ -29,11 +32,5 @@ public class DiaAula {
     @OneToOne
     @JoinColumn(name = "sala_id_fk")
     private Sala sala;
-
-    @Column(name = "dt_aula")
-    private LocalDateTime dataAula;
-
-    @OneToMany(mappedBy = "diaAula")
-    private List<Turma> turmaList;
 
 }

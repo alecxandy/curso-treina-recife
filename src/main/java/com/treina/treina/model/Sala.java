@@ -20,6 +20,4 @@ public class Sala {
     @Column(name = "nome", length = 20)
     private String nome;
 
-    @OneToOne(mappedBy = "sala")
-    private DiaAula diaAula;
 }

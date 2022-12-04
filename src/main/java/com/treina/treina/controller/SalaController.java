@@ -55,7 +55,6 @@ public class SalaController {
             Sala s = new Sala();
             s.setId(id);
             s.setNome(sala.getNome());
-            s.setDiaAula(sala.getDiaAula());
             return ResponseEntity.status(HttpStatus.OK).body(salaRepository.save(s));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
