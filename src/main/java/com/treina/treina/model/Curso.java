@@ -36,7 +36,5 @@ public class Curso {
     @Column(name = "valor")
     private float valor;
 
-    @OneToMany(mappedBy = "curso")
-    private List<Turma> turmaList;
 
 }
