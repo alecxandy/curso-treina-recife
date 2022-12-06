@@ -48,7 +48,7 @@ public class Turma {
     private Curso curso;
 
     @OneToOne
-    @JoinColumn(name = "diaAula_id_fk")
+    @JoinColumn(name = "diaAula_id_fk",nullable = true)
     private DiaAula diaAula;
 
 }
