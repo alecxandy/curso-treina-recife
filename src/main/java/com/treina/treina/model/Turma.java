@@ -47,7 +47,7 @@ public class Turma {
     @JoinColumn(name = "curso_id_fk")
     private Curso curso;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "diaAula_id_fk")
     private DiaAula diaAula;
 
