@@ -1,13 +1,14 @@
 package com.treina.treina.controller;
 
+import com.treina.treina.dto.DiaAulaDTO;
 import com.treina.treina.model.DiaAula;
 import com.treina.treina.repository.DiaaulaRepository;
+import com.treina.treina.service.DiaAulaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +19,15 @@ public class DiaAulaController {
 
 
     @Autowired
+    private DiaAulaService diaAulaService;
+
+    @Autowired
     private DiaaulaRepository diaaulaRepository;
 
 
     @PostMapping("/")
-    public ResponseEntity<DiaAula> save(@RequestBody DiaAula diaAula) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(diaaulaRepository.save(diaAula));
+    public ResponseEntity<DiaAula> save(@RequestBody DiaAulaDTO diaAulaDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(diaAulaService.save(diaAulaDTO));
     }
 
     @GetMapping("/")
@@ -56,7 +60,7 @@ public class DiaAulaController {
             d.setDataAula(diaAula.getDataAula());
             d.setSala(diaAula.getSala());
             d.setTurma(diaAula.getTurma());
-            d.setLocalDateTime(LocalDateTime.now());
+            d.setDataAula(LocalDateTime.now());
             d.setTurma(diaAula.getTurma());
             return ResponseEntity.status(HttpStatus.OK).body(diaaulaRepository.save(d));
         } else {
