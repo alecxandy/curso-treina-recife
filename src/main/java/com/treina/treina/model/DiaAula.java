@@ -19,8 +19,6 @@ public class DiaAula {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "dt_data")
-    private LocalDateTime localDateTime;
 
     @Column(name = "dt_aula")
     private LocalDateTime dataAula;
