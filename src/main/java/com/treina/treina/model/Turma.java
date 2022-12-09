@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -24,19 +25,18 @@ public class Turma {
     @Column(name = "valor")
     private Float valor;
 
-    private boolean segunda;
-    private boolean terca;
-    private boolean quarta;
-    private boolean quinta;
-    private boolean sexta;
-    private boolean sabado;
-    private boolean domingo;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    private Boolean segunda;
+    private Boolean terca;
+    private Boolean quarta;
+    private Boolean quinta;
+    private Boolean sexta;
+    private Boolean sabado;
+    private Boolean domingo;
+    @ManyToMany
     @JoinTable(name = "tb_turma_has_aluno",
             joinColumns = {@JoinColumn(name = "turma_id_fk")},
             inverseJoinColumns = {@JoinColumn(name = "aluno_id_fk")})
-    private List<Aluno> alunoList;
+    private Set<Aluno> alunoList;
 
     @JoinColumn(name = "professor_id")
     @OneToOne
@@ -45,9 +45,5 @@ public class Turma {
     @ManyToOne
     @JoinColumn(name = "curso_id_fk")
     private Curso curso;
-
-    @OneToOne
-    @JoinColumn(name = "diaAula_id_fk",nullable = true)
-    private DiaAula diaAula;
 
 }

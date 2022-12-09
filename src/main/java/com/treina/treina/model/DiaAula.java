@@ -27,7 +27,7 @@ public class DiaAula {
     @JoinColumn(name = "turma_id_fk")
     private Turma turma;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sala_id_fk")
     private Sala sala;
 
