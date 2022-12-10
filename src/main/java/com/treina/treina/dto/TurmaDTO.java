@@ -23,6 +23,7 @@ public class TurmaDTO {
     private Boolean sabado;
     private Long professor_id;
     private Long curso_id;
+    private Long diaAula_id;
     private Set<Long> alunoList;
 
 }

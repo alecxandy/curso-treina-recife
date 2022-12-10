@@ -59,9 +59,7 @@ public class DiaAulaController {
             d.setId(id);
             d.setDataAula(diaAula.getDataAula());
             d.setSala(diaAula.getSala());
-            d.setTurma(diaAula.getTurma());
             d.setDataAula(LocalDateTime.now());
-            d.setTurma(diaAula.getTurma());
             return ResponseEntity.status(HttpStatus.OK).body(diaaulaRepository.save(d));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

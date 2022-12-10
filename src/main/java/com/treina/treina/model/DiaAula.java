@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,13 +18,12 @@ public class DiaAula {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @Column(name = "dt_aula")
     private LocalDateTime dataAula;
-
-    @OneToOne
+/*
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "turma_id_fk")
-    private Turma turma;
+    private Turma turma;*/
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sala_id_fk")

@@ -13,5 +13,5 @@ public class DiaAulaDTO {
 
     private LocalDateTime localDateTime;
     private Long sala_id;
-    private Long turma_id;
+
 }
