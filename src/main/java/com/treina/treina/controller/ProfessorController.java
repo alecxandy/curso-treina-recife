@@ -44,6 +44,12 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.OK).body(professorRepository.findById(id));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Professor>> findByNomeContains(
+            @RequestParam(value = "nome", required = false) String nome) {
+        return ResponseEntity.status(HttpStatus.OK).body(professorRepository.findByNomeContains(nome));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Professor> update(@PathVariable Long id, @RequestBody Professor professor) {
         Optional<Professor> professorOptional = professorRepository.findById(id);
