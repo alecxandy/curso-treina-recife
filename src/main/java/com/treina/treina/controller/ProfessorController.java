@@ -3,6 +3,9 @@ package com.treina.treina.controller;
 import com.treina.treina.model.Professor;
 import com.treina.treina.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +27,9 @@ public class ProfessorController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Professor>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(professorRepository.findAll());
+    public ResponseEntity<Page<Professor>> listAll() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return ResponseEntity.status(HttpStatus.OK).body(professorRepository.findAll(pageable));
     }
 
     @DeleteMapping("/{id}")

@@ -3,6 +3,9 @@ package com.treina.treina.controller;
 import com.treina.treina.model.Sala;
 import com.treina.treina.repository.SalaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +26,9 @@ public class SalaController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Sala>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(salaRepository.findAll());
+    public ResponseEntity<Page<Sala>> listAll() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return ResponseEntity.status(HttpStatus.OK).body(salaRepository.findAll(pageable));
     }
 
     @GetMapping("/{id}")

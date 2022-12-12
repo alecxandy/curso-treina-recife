@@ -5,6 +5,9 @@ import com.treina.treina.model.DiaAula;
 import com.treina.treina.repository.DiaaulaRepository;
 import com.treina.treina.service.DiaAulaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +34,9 @@ public class DiaAulaController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<DiaAula>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(diaaulaRepository.findAll());
+    public ResponseEntity<Page<DiaAula>> listAll() {
+        Pageable pageable = PageRequest.of(0, 10);
+        return ResponseEntity.status(HttpStatus.OK).body(diaaulaRepository.findAll(pageable));
     }
 
     @DeleteMapping("/{id}")
