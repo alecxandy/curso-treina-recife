@@ -4,6 +4,9 @@ import com.treina.treina.dto.TurmaDTO;
 import com.treina.treina.model.*;
 import com.treina.treina.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -50,8 +53,9 @@ public class TurmaService {
         return turma;
     }
 
-    public List<Turma> listAll() {
-        return turmaRepository.findAll();
+    public Page<Turma> listAll() {
+        Pageable pageable = PageRequest.of(0,10);
+        return turmaRepository.findAll(pageable);
     }
 
     public Optional<Turma> findById(Long id) {

@@ -3,6 +3,9 @@ package com.treina.treina.controller;
 import com.treina.treina.model.Aluno;
 import com.treina.treina.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +26,9 @@ public class ALunoController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Aluno>> listAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.findAll());
+    public ResponseEntity<Page<Aluno>> listAll() {
+        Pageable pageable = PageRequest.of(0,10);
+        return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.findAll(pageable));
     }
 
     @GetMapping("/{id}")
