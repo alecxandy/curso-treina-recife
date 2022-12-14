@@ -32,6 +32,7 @@ public class Turma {
     private Boolean sexta;
     private Boolean sabado;
     private Boolean domingo;
+
     @ManyToMany
     @JoinTable(name = "tb_turma_has_aluno",
             joinColumns = {@JoinColumn(name = "turma_id_fk")},
@@ -39,11 +40,15 @@ public class Turma {
     private Set<Aluno> alunoList;
 
     @JoinColumn(name = "professor_id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Professor professor;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "curso_id_fk")
     private Curso curso;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "diaAula_id_fk")
+    private DiaAula diaAula;
 
 }

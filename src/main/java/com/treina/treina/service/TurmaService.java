@@ -2,16 +2,14 @@ package com.treina.treina.service;
 
 import com.treina.treina.dto.TurmaDTO;
 import com.treina.treina.model.*;
-import com.treina.treina.repository.AlunoRepository;
-import com.treina.treina.repository.CursoRepository;
-import com.treina.treina.repository.ProfessorRepository;
-import com.treina.treina.repository.TurmaRepository;
+import com.treina.treina.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TurmaService {
@@ -24,17 +22,22 @@ public class TurmaService {
     private ProfessorRepository professorRepository;
     @Autowired
     private AlunoRepository alunoRepository;
+    @Autowired
+    private DiaaulaRepository diaaulaRepository;
 
     public Turma save(TurmaDTO turmaDTO) {
         Curso curso = cursoRepository.findById(turmaDTO.getCurso_id())
                 .orElseThrow(() -> new RuntimeException("id is not exists"));
         Professor professor = professorRepository.findById(turmaDTO.getProfessor_id())
                 .orElseThrow(() -> new RuntimeException("id is not exists"));
+        DiaAula diaAula = diaaulaRepository.findById(turmaDTO.getDiaAula_id())
+                .orElseThrow(() -> new RuntimeException("id is not exists"));
 
         Turma turma = new Turma();
         turma.setAlunoList(transfomar(turmaDTO.getAlunoList()));
         turma.setCurso(curso);
         turma.setProfessor(professor);
+        turma.setDiaAula(diaAula);
         turma.setValor(turmaDTO.getValor());
         turma.setDomingo(turmaDTO.getDomingo());
         turma.setSegunda(turmaDTO.getSegunda());
@@ -62,7 +65,6 @@ public class TurmaService {
     public Turma update(Turma turma) {
         return turmaRepository.save(turma);
     }
-
 
 
     //Metodo que trasforma uma lista de inteiro em uma lista de Alunos

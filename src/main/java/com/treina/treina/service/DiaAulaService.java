@@ -29,15 +29,9 @@ public class DiaAulaService {
         Sala sala = salaRepository.findById(diaAulaDTO.getSala_id())
                 .orElseThrow(() -> new RuntimeException("Id is not exists"));
 
-        Turma turma = turmaRepository.findById(diaAulaDTO.getTurma_id())
-                .orElseThrow(() -> new RuntimeException("Id is not exists"));
-
         DiaAula diaAula = new DiaAula();
-
         diaAula.setDataAula(LocalDateTime.now());
-        diaAula.setTurma(turma);
         diaAula.setSala(sala);
-
         return diaaulaRepository.save(diaAula);
     }
 }
