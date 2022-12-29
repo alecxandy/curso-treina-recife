@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_usuario")
+@Table(name = "tb_usuario")//UserDetails: configuração de detalhes do usuario
 public class Usuario implements Serializable, UserDetails {
 
     @Id
@@ -36,10 +36,9 @@ public class Usuario implements Serializable, UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roleList;
 
-
-    @Override
+    @Override//metodo de carregamento das roles
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roleList;
     }
 
     @Override

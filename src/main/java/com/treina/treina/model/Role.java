@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.UUID;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -14,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_role")
-public class Role {
+public class Role implements Serializable, GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,4 +23,10 @@ public class Role {
 
     @Column(name = "descricao")
     private String descricao;
+
+    @Override//informa qual a descricao
+    public String getAuthority() {
+        return this.descricao;
+    }
+
 }

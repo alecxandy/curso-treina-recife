@@ -1,7 +1,10 @@
 package com.treina.treina.config;
 
+import com.treina.treina.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,9 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+        auth
+                .userDetailsService(usuarioService)
+                .passwordEncoder(passwordEncoder());
     }
 
 
@@ -23,7 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeHttpRequests()
-                .anyRequest().permitAll()
+
+                .antMatchers(HttpMethod.POST, "/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/").hasAnyRole("USER", "ADMIN")
+
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
 
