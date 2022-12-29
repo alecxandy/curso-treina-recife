@@ -74,7 +74,7 @@ public class TurmaService {
     //Metodo que trasforma uma lista de inteiro em uma lista de Alunos
     public Set<Aluno> transfomar(Set<Long> longList) {
         Set<Aluno> alunoList = new HashSet<>();
-        longList.stream().forEach(e -> {
+        longList.forEach(e -> {
             Aluno aluno = alunoRepository.findById(e).orElseThrow(() -> new RuntimeException("Id is not existes"));
             alunoList.add(aluno);
         });
