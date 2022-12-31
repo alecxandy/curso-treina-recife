@@ -6,16 +6,16 @@ import com.treina.treina.model.Usuario;
 import com.treina.treina.repository.RoleRepository;
 import com.treina.treina.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -25,8 +25,8 @@ public class UsuarioController {
     private RoleRepository roleRepository;
 
 
-    @PostMapping("/usuario/save")
-    public Usuario save(@RequestBody UsuarioDTO usuarioDTO) {
+    @PostMapping("/")
+    public ResponseEntity<Usuario> save(@RequestBody UsuarioDTO usuarioDTO) {
         List<Role> roleList = new ArrayList<>();
         usuarioDTO.getRoleList().forEach(e -> {
             Role role = roleRepository.findById(e)
@@ -38,12 +38,12 @@ public class UsuarioController {
         usuario.setNome(usuarioDTO.getNome());
         usuario.setRoleList(roleList);
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuarioDTO.getSenha()));
-        return usuarioRepository.save(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuario));
     }
 
-    @GetMapping("/usuario/listAll")
-    public List<Usuario> listAll() {
-        return usuarioRepository.findAll();
+    @GetMapping("/")
+    public ResponseEntity<List<Usuario>> listAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.findAll());
     }
 
 }

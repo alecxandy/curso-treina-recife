@@ -3,30 +3,38 @@ package com.treina.treina.controller;
 import com.treina.treina.model.Role;
 import com.treina.treina.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/role")
 public class RoleController {
 
     @Autowired
     private RoleRepository roleRepository;
 
-    @PostMapping("/role/save")
-    public Role save(@RequestBody Role role) {
-        return roleRepository.save(role);
+
+    @PostMapping("/")
+    public ResponseEntity<Role> save(@RequestBody Role role) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(roleRepository.save(role));
     }
 
-    @GetMapping("/role/listAll")
-    public List<Role> listAll() {
-        return roleRepository.findAll();
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/")
+    public ResponseEntity<List<Role>> listAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(roleRepository.findAll());
     }
 
-    @GetMapping("/role/{uuid}")
-    public Optional<Role> findById(@PathVariable Long id) {
-        return roleRepository.findById(id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Role>> findById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(roleRepository.findById(id));
     }
+
 
 }

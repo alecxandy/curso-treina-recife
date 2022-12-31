@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
+//@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,12 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeHttpRequests()
-
-                .antMatchers(HttpMethod.POST, "/").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/").hasAnyRole("USER", "ADMIN")
-
+                .antMatchers(HttpMethod.GET,"/api/role/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/Usuario/**").hasRole("ADMIN")
+                .antMatchers( HttpMethod.GET,"/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
