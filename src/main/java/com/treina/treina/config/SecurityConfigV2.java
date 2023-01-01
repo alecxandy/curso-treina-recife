@@ -21,9 +21,11 @@ public class SecurityConfigV2 extends GlobalMethodSecurityConfiguration {
                 .httpBasic()
                 .and()
                 .authorizeHttpRequests()
-                /* .antMatchers(HttpMethod.GET, "/api/role/**").hasRole("ADMIN")
+                 .antMatchers(HttpMethod.GET, "/api/role/**").hasRole("ADMIN")
+                 .antMatchers(HttpMethod.POST, "/api/role/**").hasRole("ADMIN")
+                 .antMatchers(HttpMethod.GET, "/api/Usuario/**").hasRole("ADMIN")
                  .antMatchers(HttpMethod.POST, "/api/Usuario/**").hasRole("ADMIN")
-                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()*/
+                 .antMatchers(HttpMethod.GET, "/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
