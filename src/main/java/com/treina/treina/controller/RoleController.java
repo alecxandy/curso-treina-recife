@@ -24,7 +24,7 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleRepository.save(role));
     }
 
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     @GetMapping("/")
     public ResponseEntity<List<Role>> listAll() {
         return ResponseEntity.status(HttpStatus.OK).body(roleRepository.findAll());
