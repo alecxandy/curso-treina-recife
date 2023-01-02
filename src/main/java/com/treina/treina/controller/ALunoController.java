@@ -27,13 +27,17 @@ public class ALunoController {
 
     @GetMapping("/")
     public ResponseEntity<Page<Aluno>> listAll() {
-        Pageable pageable = PageRequest.of(0,10);
+        Pageable pageable = PageRequest.of(0, 10);
         return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.findAll(pageable));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Aluno>> findById(@PathVariable Long id) {
-        Optional<Aluno> optionalAluno = alunoRepository.findById(id);
+
+        Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new RuntimeException("Id is not exists"));
+
+
+                Optional < Aluno > optionalAluno = alunoRepository.findById(id);
         if (optionalAluno.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(optionalAluno);
         } else {
