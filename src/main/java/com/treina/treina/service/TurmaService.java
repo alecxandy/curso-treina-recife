@@ -1,6 +1,7 @@
 package com.treina.treina.service;
 
 import com.treina.treina.dto.TurmaDTO;
+import com.treina.treina.exception.BadRequestException;
 import com.treina.treina.model.*;
 import com.treina.treina.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,11 @@ public class TurmaService {
 
     public Turma save(TurmaDTO turmaDTO) {
         Curso curso = cursoRepository.findById(turmaDTO.getCurso_id())
-                .orElseThrow(() -> new RuntimeException("id is not exists"));
+                .orElseThrow(() -> new BadRequestException("id is not exists"));
         Professor professor = professorRepository.findById(turmaDTO.getProfessor_id())
-                .orElseThrow(() -> new RuntimeException("id is not exists"));
+                .orElseThrow(() -> new BadRequestException("id is not exists"));
         DiaAula diaAula = diaaulaRepository.findById(turmaDTO.getDiaAula_id())
-                .orElseThrow(() -> new RuntimeException("id is not exists"));
+                .orElseThrow(() -> new BadRequestException("id is not exists"));
 
         Turma turma = new Turma();
         turma.setAlunoList(transfomar(turmaDTO.getAlunoList()));
@@ -75,7 +76,7 @@ public class TurmaService {
     public Set<Aluno> transfomar(Set<Long> longList) {
         Set<Aluno> alunoList = new HashSet<>();
         longList.forEach(e -> {
-            Aluno aluno = alunoRepository.findById(e).orElseThrow(() -> new RuntimeException("Id is not existes"));
+            Aluno aluno = alunoRepository.findById(e).orElseThrow(() -> new BadRequestException("ID is not existes"));
             alunoList.add(aluno);
         });
         return alunoList;
