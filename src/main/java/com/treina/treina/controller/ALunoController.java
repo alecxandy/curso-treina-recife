@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class ALunoController {
     private AlunoRepository alunoRepository;
 
     @PostMapping("/")
-    public ResponseEntity<Aluno> save(@RequestBody Aluno aluno) {
+    public ResponseEntity<Aluno> save(@RequestBody @Valid Aluno aluno) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoRepository.save(aluno));
     }
 
@@ -35,8 +36,6 @@ public class ALunoController {
     public ResponseEntity<Optional<Aluno>> findById(@PathVariable Long id) {
 
         Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new RuntimeException("Id is not exists"));
-
-
                 Optional < Aluno > optionalAluno = alunoRepository.findById(id);
         if (optionalAluno.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(optionalAluno);
