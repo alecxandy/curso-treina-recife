@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 //Modelo da Handler
 @Data
-@Builder
+@Builder//classe statica
 public class BadRequestExceptionDetalis {
 
     private String title;
